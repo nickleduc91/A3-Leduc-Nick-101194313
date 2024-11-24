@@ -12,7 +12,7 @@
     <div class="container">
         <div class="d-flex align-items-center title-container">
             <h1 class="title">Welcome to the Game!</h1>
-            <button class="btn btn-primary start-game" onclick="startGame()">Start New Game</button>
+            <button id="start" class="btn btn-primary start-game" onclick="startGame()">Start New Game</button>
         </div>
         <div class="mb-2">
             <label for="output" class="form-label label">Game output</label>
@@ -25,6 +25,7 @@
                     <button disabled class="btn btn-primary" type="button" id="submit">Submit</button>
                     <input id="input" type="text" class="form-control" placeholder="Player Input" aria-label="Example text with button addon" aria-describedby="button-addon1">
                   </div>
+                <button disabled class="btn btn-primary" type="button" id="draw">Draw Event Card</button>
                 <button disabled class="btn btn-primary" type="button" id="end-turn">End Turn</button>
             </div>
 
@@ -35,6 +36,7 @@
                         <th scope="col">Player Id</th>
                         <th scope="col"># Shields</th>
                         <th scope="col"># Cards</th>
+                        <th scope="col">Is Winner?</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -42,21 +44,25 @@
                         <th scope="row">1</th>
                         <td id="p1ShieldCount">0</td>
                         <td id="p1CardCount">12</td>
+                        <td id="p1IsWinner">No</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
                         <td id="p2ShieldCount">0</td>
                         <td id="p2CardCount">12</td>
+                        <td id="p2IsWinner">No</td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
                         <td id="p3ShieldCount">0</td>
                         <td id="p3CardCount">12</td>
+                        <td id="p3IsWinner">No</td>
                       </tr>
                       <tr>
                         <th scope="row">4</th>
                         <td id="p4ShieldCount">0</td>
                         <td id="p4CardCount">12</td>
+                        <td id="p4IsWinner">No</td>
                       </tr>
                     </tbody>
                   </table>

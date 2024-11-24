@@ -8,6 +8,20 @@ $(document).ready(function() {
         $("#end-turn").prop('disabled', true);
         $("#output").val('');
 
+        $("#draw").addClass("highlight");
+        $('#draw').prop('disabled', false);
+
+        const currentPlayerResponse = await fetch(`${apiBaseUrl}/currentPlayer`);
+        const currentPlayerResult = await currentPlayerResponse.text();
+
+        addToOutput(`${currentPlayerResult}, click the 'Draw Event Card' button to begin!`);
+        addToOutput("");
+    });
+
+    $("#draw").click(async function() {
+        $("#draw").removeClass("highlight");
+        $('#draw').prop('disabled', true);
+
         await playTurn();
     });
 });
@@ -15,8 +29,18 @@ $(document).ready(function() {
 async function startGame() {
     $("#output").val('');
 
+    addToOutput("A new game has started!");
+    addToOutput("Player ID: P1, click the 'Draw Event Card' button to begin!");
+    addToOutput("");
+
+    $("#draw").addClass("highlight");
+    $('#draw').prop('disabled', false);
+
     await fetch(`${apiBaseUrl}/start`, { method: "POST" });
-    await playTurn();
+    setPlayerStats();
+    for(let i = 0; i < 4; i++) {
+        $(`#p${i+1}IsWinner`).text("No");
+    }
 }
 
 async function playTurn() {
@@ -79,6 +103,16 @@ async function playTurn() {
 
     if(await hasWinner()) {
         await displayWinners();
+
+        // Set winner in UI
+        for(let i = 0; i < 4; i++) {
+            let isWinnerResponse = await fetch(`${apiBaseUrl}/isWinner?playerId=${i+1}`);
+            let isWinnerResult = await isWinnerResponse.json();
+
+            if(isWinnerResult) {
+                $(`#p${i+1}IsWinner`).text("Yes");
+            }
+        }
 
         $("#end-turn").prop('disabled', true).removeClass('highlight');
         $("#input").prop('disabled', true).removeClass('highlight');

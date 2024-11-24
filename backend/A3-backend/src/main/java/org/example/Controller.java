@@ -33,6 +33,29 @@ public class Controller {
         game.initializePlayers();
     }
 
+    @PostMapping("/rigEventDeck")
+    public void rigEventDeck(@RequestBody List<CardType> cardTypes) {
+        for (int i = 0; i < cardTypes.size(); i++) {
+            game.getEventDeck().getCards().set(i, new EventCard(cardTypes.get(i)));
+        }
+    }
+
+    @PostMapping("/rigAdventureDeck")
+    public void rigAdventureDeck(@RequestBody List<CardType> cardTypes) {
+        for (int i = 0; i < cardTypes.size(); i++) {
+            game.getAdventureDeck().getCards().set(i, new AdventureCard(cardTypes.get(i)));
+        }
+    }
+
+    @PostMapping("/rigPlayerDeck")
+    public void rigPlayerDeck(@RequestParam int playerId, @RequestBody List<CardType> cardTypes) {
+        Player p = game.getPlayer(playerId);
+
+        for (int i = 0; i < p.getHand().size(); i++) {
+            p.getHand().set(i, new AdventureCard((cardTypes.get(i))));
+        }
+    }
+
     @PostMapping("/start")
     public void startGame() {
         this.game = new Game();
@@ -423,6 +446,16 @@ public class Controller {
         }
 
         return output.toString();
+    }
+
+    @GetMapping("/getHand")
+    public List<AdventureCard> getHand(@RequestParam int playerId) {
+        return game.getPlayer(playerId - 1).getHand();
+    }
+
+    @GetMapping("/isWinner")
+    public Boolean isWinner(@RequestParam int playerId) {
+        return game.getWinners().contains(game.getPlayer(playerId - 1));
     }
 
     public void handleBuildStage(ReturnModel model, int position) {
