@@ -49,7 +49,7 @@ public class Controller {
 
     @PostMapping("/rigPlayerDeck")
     public void rigPlayerDeck(@RequestParam int playerId, @RequestBody List<CardType> cardTypes) {
-        Player p = game.getPlayer(playerId);
+        Player p = game.getPlayer(playerId - 1);
 
         for (int i = 0; i < p.getHand().size(); i++) {
             p.getHand().set(i, new AdventureCard((cardTypes.get(i))));
@@ -259,7 +259,6 @@ public class Controller {
         StringBuilder output = new StringBuilder();
         Player p = game.getPlayer(playerId);
 
-        output.append("\n");
         if(p.getAttack().isEmpty()) {
             output.append("Attack for ").append(p).append(": No cards were selected");
         } else {
@@ -404,7 +403,6 @@ public class Controller {
     public String postStage() {
         StringBuilder output = new StringBuilder();
 
-        output.append("\n");
         output.append("Cards for Stage ").append(game.getCurrentStageIndex() + 1).append(": ");
 
         for(AdventureCard card : game.getQuest().get(game.getCurrentStageIndex())) {

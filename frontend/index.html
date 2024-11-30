@@ -10,63 +10,159 @@
 </head>
 <body>
     <div class="container">
-        <div class="d-flex align-items-center title-container">
+        <div class="d-flex align-items-center title-container mb-2">
             <h1 class="title">Welcome to the Game!</h1>
             <button id="start" class="btn btn-primary start-game" onclick="startGame()">Start New Game</button>
         </div>
-        <div class="mb-2">
-            <label for="output" class="form-label label">Game output</label>
-            <textarea readonly class="form-control output" id="output" rows="15"></textarea>
+        <div class="mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <label for="output" class="form-label label">Game output</label>
+                    <textarea readonly class="form-control info-containers" id="output" rows="15"></textarea>
+                </div>
+<!--                <div class="col-5">-->
+<!--                    <label for="hands" class="form-label label">Player hands</label>-->
+<!--                    <div class="info-containers" id="hands">-->
+<!--                        <table class="table">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th scope="col">Player Id</th>-->
+<!--                                <th scope="col">Hand</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr>-->
+<!--                                <th scope="row">1</th>-->
+<!--                                <td id="p1Hand">N/A</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th scope="row">2</th>-->
+<!--                                <td id="p2Hand">N/A</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th scope="row">3</th>-->
+<!--                                <td id="p3Hand">N/A</td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <th scope="row">4</th>-->
+<!--                                <td id="p4Hand">N/A</td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
         </div>
-        <div class="row text-center info-container">
-            <div class="col-4 border input-container p-5">
-                <div class="mb-2"><span class="label">Current Player's Turn - </span> <span id="currentPlayer">Player ID: P1</span></div>
-                <div class="input-group mb-3">
-                    <button disabled class="btn btn-primary" type="button" id="submit">Submit</button>
-                    <input id="input" type="text" class="form-control" placeholder="Player Input" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                  </div>
-                <button disabled class="btn btn-primary" type="button" id="draw">Draw Event Card</button>
-                <button disabled class="btn btn-primary" type="button" id="end-turn">End Turn</button>
+        <div class="text-center">
+
+            <div class="row">
+
+                <div class="col-4">
+                    <div class="info-containers-below">
+                        <div class="mt-2">
+                            <div class="mb-4"><span class="label">Current Player's Turn - </span> <span id="currentPlayer">Player ID: P1</span></div>
+                            <div class="input-group mb-4">
+                                <button disabled class="btn btn-primary" type="button" id="submit">Submit</button>
+                                <input id="input" type="text" class="form-control" placeholder="Player Input" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            </div>
+                            <button disabled class="btn btn-primary" type="button" id="draw">Draw Event Card</button>
+                            <button disabled class="btn btn-primary" type="button" id="end-turn">End Turn</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="info-containers-below">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Player Id</th>
+                                <th scope="col"># Shields</th>
+                                <th scope="col"># Cards</th>
+                                <th scope="col">Is Winner?</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td id="p1ShieldCount">0</td>
+                                <td id="p1CardCount">12</td>
+                                <td id="p1IsWinner">No</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td id="p2ShieldCount">0</td>
+                                <td id="p2CardCount">12</td>
+                                <td id="p2IsWinner">No</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td id="p3ShieldCount">0</td>
+                                <td id="p3CardCount">12</td>
+                                <td id="p3IsWinner">No</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td id="p4ShieldCount">0</td>
+                                <td id="p4CardCount">12</td>
+                                <td id="p4IsWinner">No</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="col-8 border input-container p-5">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Player Id</th>
-                        <th scope="col"># Shields</th>
-                        <th scope="col"># Cards</th>
-                        <th scope="col">Is Winner?</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td id="p1ShieldCount">0</td>
-                        <td id="p1CardCount">12</td>
-                        <td id="p1IsWinner">No</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td id="p2ShieldCount">0</td>
-                        <td id="p2CardCount">12</td>
-                        <td id="p2IsWinner">No</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td id="p3ShieldCount">0</td>
-                        <td id="p3CardCount">12</td>
-                        <td id="p3IsWinner">No</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td id="p4ShieldCount">0</td>
-                        <td id="p4CardCount">12</td>
-                        <td id="p4IsWinner">No</td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
+<!--            <div class="col-4 border input-container p-5">-->
+<!--                <div class="mb-2"><span class="label">Current Player's Turn - </span> <span id="currentPlayer">Player ID: P1</span></div>-->
+<!--                <div class="input-group mb-3">-->
+<!--                    <button disabled class="btn btn-primary" type="button" id="submit">Submit</button>-->
+<!--                    <input id="input" type="text" class="form-control" placeholder="Player Input" aria-label="Example text with button addon" aria-describedby="button-addon1">-->
+<!--                  </div>-->
+<!--                <button disabled class="btn btn-primary" type="button" id="draw">Draw Event Card</button>-->
+<!--                <button disabled class="btn btn-primary" type="button" id="end-turn">End Turn</button>-->
+<!--            </div>-->
+
+<!--            <div class="col-8 border input-container p-5">-->
+<!--                <table class="table">-->
+<!--                    <thead>-->
+<!--                      <tr>-->
+<!--                        <th scope="col">Player Id</th>-->
+<!--                        <th scope="col"># Shields</th>-->
+<!--                        <th scope="col"># Cards</th>-->
+<!--                        <th scope="col">Is Winner?</th>-->
+<!--                      </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                      <tr>-->
+<!--                        <th scope="row">1</th>-->
+<!--                        <td id="p1ShieldCount">0</td>-->
+<!--                        <td id="p1CardCount">12</td>-->
+<!--                        <td id="p1IsWinner">No</td>-->
+<!--                      </tr>-->
+<!--                      <tr>-->
+<!--                        <th scope="row">2</th>-->
+<!--                        <td id="p2ShieldCount">0</td>-->
+<!--                        <td id="p2CardCount">12</td>-->
+<!--                        <td id="p2IsWinner">No</td>-->
+<!--                      </tr>-->
+<!--                      <tr>-->
+<!--                        <th scope="row">3</th>-->
+<!--                        <td id="p3ShieldCount">0</td>-->
+<!--                        <td id="p3CardCount">12</td>-->
+<!--                        <td id="p3IsWinner">No</td>-->
+<!--                      </tr>-->
+<!--                      <tr>-->
+<!--                        <th scope="row">4</th>-->
+<!--                        <td id="p4ShieldCount">0</td>-->
+<!--                        <td id="p4CardCount">12</td>-->
+<!--                        <td id="p4IsWinner">No</td>-->
+<!--                      </tr>-->
+<!--                    </tbody>-->
+<!--                  </table>-->
+<!--            </div>-->
 
         </div>
 

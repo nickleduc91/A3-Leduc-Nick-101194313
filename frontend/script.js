@@ -86,7 +86,7 @@ async function playTurn() {
                 eligibleParticipantsResponse = await fetch(`${apiBaseUrl}/eligibleParticipants`);
                 eligibleParticipantsResult = await eligibleParticipantsResponse.json();
 
-                await setUpAttacks(eligibleParticipantsResult.eligiblePlayers);
+                await setUpAttacks(eligibleParticipantsResult.eligiblePlayers, i + 1);
                 await resolveAttacks(i);
                 isDone = await endResolution(i);
 
@@ -129,6 +129,8 @@ async function displayWinners() {
     let displayWinnersResponse = await fetch(`${apiBaseUrl}/displayWinners`);
     let displayWinnersResult = await displayWinnersResponse.text();
 
+    addToOutput("");
+    addToOutput("GAME IS NOW OVER!")
     addToOutput(displayWinnersResult);
 }
 
@@ -167,13 +169,13 @@ async function resolveAttacks(stageIndex) {
     addToOutput(resolveAttacksResult);
 }
 
-async function setUpAttacks(eligiblePlayers) {
+async function setUpAttacks(eligiblePlayers, stage) {
     // Build attack for each player
     for(let player of eligiblePlayers) {
         addToOutput(player.displayedHand);
 
         while(true) {
-            addToOutput(player.id + ", enter the index of the card in your hand you would like to add to the attack, or type 'q' to quit building this attack");
+            addToOutput(player.id + `, enter the index of the card in your hand you would like to add to the stage ${stage} attack, or type 'q' to quit building this attack`);
             let choice = await waitForBuildInput(player.player.index);
 
             if(choice === "q") {
@@ -318,8 +320,7 @@ async function getSponsor(currentPlayerModel) {
 async function trimHand(playerModel) {
     try {
         for (let i = 0; i < playerModel.trimCount; i++) {
-            addToOutput("");
-            addToOutput(`A trim is needed for ${playerModel.id}`);
+            addToOutput(`\nA trim is needed for ${playerModel.id}`);
 
             // Display the players hand
             let displayHandResponse = await fetch(`${apiBaseUrl}/displayHand?playerId=${playerModel.player.index}`);
@@ -364,7 +365,7 @@ function addToOutput(text, input = false) {
     const output = $("#output");
 
     if (input) {
-        text = `--- ${text} ---`;
+        text = `\n--- ${text} ---\n`;
     }
 
     output.val(function (i, currentText) {
