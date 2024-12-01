@@ -1034,10 +1034,13 @@ public class SeleniumTest {
         // Player 1 - Hand
         assertHandSize(1, 12);
         assertHand(1, List.of(CardType.F15, CardType.DAGGER, CardType.DAGGER, CardType.DAGGER, CardType.DAGGER, CardType.SWORD, CardType.SWORD, CardType.SWORD, CardType.HORSE, CardType.HORSE, CardType.HORSE, CardType.HORSE));
+
         // Player 2 - Hand
         assertHand(2, List.of(CardType.F5, CardType.F5, CardType.F10, CardType.F15, CardType.F15, CardType.F20, CardType.F20, CardType.F25, CardType.F30, CardType.F30, CardType.F40));
+
         // Player 3 - Hand
         assertHand(3, List.of(CardType.F5, CardType.F5, CardType.F10, CardType.F15, CardType.F15, CardType.F20, CardType.F20, CardType.F25, CardType.F25, CardType.F30, CardType.F40, CardType.LANCE));
+
         // Player 4 - Hand
         assertHand(4, List.of(CardType.F5, CardType.F5, CardType.F10, CardType.F15, CardType.F15, CardType.F20, CardType.F20, CardType.F25, CardType.F25, CardType.F30, CardType.F50, CardType.EXCALIBUR));
 
@@ -1045,6 +1048,24 @@ public class SeleniumTest {
 
     private void assertHand(int playerId, List<CardType> hand) {
         assertEquals(hand, getHand(playerId));
+
+        // Make sure hand displayed on web is equal
+        String displayedHand = driver.findElement(By.id("p" + playerId + "Hand")).getText();
+        displayedHand = displayedHand.replace("\n", ",").replaceAll("\\s*,\\s*", ",");
+
+        StringBuilder expectedHandBuilder = new StringBuilder();
+
+        // Create string that represents the players hand
+        for(CardType type : hand) {
+            expectedHandBuilder.append(type.getName()).append(",");
+        }
+
+        // Remove the last comma and space if it exists
+        if (!expectedHandBuilder.isEmpty()) {
+            expectedHandBuilder.setLength(expectedHandBuilder.length() - 1);
+        }
+
+        assertEquals(expectedHandBuilder.toString(), displayedHand);
     }
 
     private void assertWinner(int playerId) {
@@ -1147,7 +1168,17 @@ public class SeleniumTest {
 
     private void enterInputAndSubmit(String text) {
         driver.findElement(By.id("input")).sendKeys(text);
+        try {
+            Thread.sleep(615);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         clickSubmitButton();
+        try {
+            Thread.sleep(615);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void rigDeck(String endpoint, List<CardType> cardTypes) {

@@ -6,7 +6,7 @@ body {
 
 .title-container {
     text-align: center;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .title {
@@ -19,12 +19,15 @@ label {
 }
 
 .info-containers {
-    min-height: 300px !important;
+    min-height: 420px !important;
     background-color: rgb(30 41 59) !important;
     border-radius: 15px !important;
     border: none !important;
     color: white !important;
     padding: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info-containers-below {
@@ -34,10 +37,13 @@ label {
     border: none !important;
     color: white !important;
     padding: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .label {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .highlight {
@@ -55,6 +61,30 @@ label {
 .table {
     --bs-table-bg: rgb(30 41 59) !important;
     --bs-table-color: white !important;
+}
+
+#hands .table tbody tr {
+    height: 60px;
+    vertical-align: middle;
+}
+
+#output {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+#output::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#output::-webkit-scrollbar {
+    width: 6px;
+}
+
+#output::-webkit-scrollbar-thumb {
+    width: 6px;
+    background-color: var(--bs-primary);
+    border-radius: 12px
 }
 
 

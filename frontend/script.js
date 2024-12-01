@@ -355,6 +355,26 @@ async function setPlayerStats() {
             const getCardCountResponse = await fetch(`${apiBaseUrl}/getCardCount?playerId=${playerId}`);
             const getCardCountResult = await getCardCountResponse.text();
             $(`#p${playerId}CardCount`).text(getCardCountResult);
+
+            const getHandResponse = await fetch(`${apiBaseUrl}/getHand?playerId=${playerId}`);
+            const getHandResult = await getHandResponse.json();
+            console.log(getHandResult);
+
+            // Get and display the player's hand
+            let foes = [];
+            let nonFoes = [];
+
+            // Iterate through the JSON array
+            getHandResult.forEach(obj => {
+                if (obj.isFoe) {
+                    foes.push(obj.name);
+                } else {
+                    nonFoes.push(obj.name);
+                }
+            });
+
+            const hand = foes.join(", ") + "<br>" + nonFoes.join(", ");
+            $(`#p${playerId}Hand`).html(hand);
         }
     } catch (error) {
         console.error("Error in setPlayerStats:", error);
