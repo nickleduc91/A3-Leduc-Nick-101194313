@@ -1156,7 +1156,7 @@ public class SeleniumTest {
 
     private void clickDrawButton() {
         try {
-            Thread.sleep(1250);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1165,7 +1165,7 @@ public class SeleniumTest {
 
     private void clickSubmitButton() {
         try {
-            Thread.sleep(1250);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -1173,19 +1173,24 @@ public class SeleniumTest {
     }
 
     private void clickEndTurnButton() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.findElement(By.id("end-turn")).click();
     }
 
     private void enterInputAndSubmit(String text) {
         driver.findElement(By.id("input")).sendKeys(text);
         try {
-            Thread.sleep(1250);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         clickSubmitButton();
         try {
-            Thread.sleep(1250);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
